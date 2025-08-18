@@ -20,7 +20,6 @@ class Program
                 if (guess < numberToGuess)
                 {
                     Console.WriteLine("Too low! Try again.");
-                    Console.WriteLine("Too much low");
                 }
                 else if (guess > numberToGuess)
                 {
@@ -41,4 +40,5 @@ class Program
 
 //Test//
 //Test2//
+
 
