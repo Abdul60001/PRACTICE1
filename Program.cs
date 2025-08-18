@@ -9,7 +9,7 @@ class Program
         int guess = 0;
 
         Console.WriteLine("🎲 Guess the number (between 1 and 10):");
-
+"
         while (guess != numberToGuess)
         {
             Console.Write("Enter your guess: ");
@@ -20,6 +20,7 @@ class Program
                 if (guess < numberToGuess)
                 {
                     Console.WriteLine("Too low! Try again.");
+                    Console.WriteLine("Too much low");
                 }
                 else if (guess > numberToGuess)
                 {
@@ -40,3 +41,4 @@ class Program
 
 //Test//
 //Test2//
+
