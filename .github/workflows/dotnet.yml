@@ -6,9 +6,13 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  PROJECT_FILE: "Practice1.csproj"  # 👈 match the filename you just created
+
 jobs:
   build:
-    runs-on: windows-latest # or ubuntu-latest, both are fine
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,23 +23,19 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore "$PROJECT_FILE"
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build "$PROJECT_FILE" -c Release --no-restore
 
-      # This step is safe even if you don't have tests; it will just do nothing.
       - name: Test (if any)
-        run: dotnet test --configuration Release --no-build || echo "No tests"
+        run: dotnet test -c Release --no-build || echo "No tests"
 
-      # Creates a ready-to-run build and uploads it as a downloadable artifact.
       - name: Publish
-        run: dotnet publish **/*.csproj -c Release -o out
+        run: dotnet publish "$PROJECT_FILE" -c Release -o out
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-build
           path: out/**
-
-
